@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flow of a Falling Film Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body
+  class="bg-cover bg-center bg-scroll text-white flex"
+  style="background-image: url('../assets/images/bg2.png');"
+>
+   
+<!-- Add this in your <head> -->
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("w-48");
+    sidebar.classList.toggle("w-16");
+
+    const labels = sidebar.querySelectorAll(".nav-label");
+    labels.forEach(label => label.classList.toggle("hidden"));
+  }
+
+  function openNewTab() {
+    window.open("calc.html", "_blank");
+  }
+</script>
+
+<!-- Sidebar -->
+<div id="sidebar" class="h-screen w-16 transition-all duration-300 bg-gradient-to-b from-[#27244b] to-[#05031a] fixed flex flex-col items-start px-2 py-6 space-y-6">
+  
+  <!-- App Icon -->
+  <div class="w-full flex items-center justify-center mb-8 space-x-3">
+    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-700 to-indigo-500"></div>
+    <span class="nav-label hidden text-sm font-track">WAVE</span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="flex flex-col items-start space-y-4 w-full">
+    
+    <!-- Home Button -->
+    <button onclick="window.location.href='index.html'" class="flex items-center space-x-3 group text-white w-full px-2 hover:bg-white/10 rounded py-2">
+      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" />
+      </svg>
+      <span class="nav-label hidden text-sm">Home</span>
+    </button>
+
+    <!-- Input / New Calculation -->
+    <button onclick="openNewTab()" class="flex items-center space-x-3 group text-white w-full px-2 hover:bg-white/10 rounded py-2">
+      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M12 4v16m8-8H4" />
+      </svg>
+      <span class="nav-label hidden text-sm">New Calc</span>
+    </button>
+
+    <!-- History -->
+<button onclick="window.location.href='history.html'" class="flex items-center space-x-3 group text-white w-full px-2 hover:bg-white/10 rounded py-2">
+  <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span class="nav-label hidden text-sm">History</span>
+</button>
+
+    <!-- Settings -->
+<button onclick="window.location.href='settings.html'" class="flex items-center space-x-3 group text-white w-full px-2 hover:bg-white/10 rounded py-2 mt-6">
+  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path d="M11.25 2.25v1.5m0 16.5v1.5M4.219 4.219l1.061 1.061M18.72 18.72l1.06 1.061M2.25 11.25h1.5m16.5 0h1.5M4.219 18.72l1.061-1.06M18.72 5.28l1.06-1.061M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+  <span class="nav-label hidden text-sm">Settings</span>
+</button>
+
+
+  <!-- Collapse Button -->
+  <div class="mt-auto w-full flex justify-center pt-4">
+    <button onclick="toggleSidebar()" class="text-white opacity-60 hover:opacity-100">
+      <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M19 12H5" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+
+   <!-- Main Content -->
+    <div class="flex-1 px-8 py-10">
+      <h1 class="text-center text-3xl font-bold text-pink-400 mb-8">Flow of a Falling Film Calculator</h1>
+
+<!-- Fluid Selector -->
+<div class="flex justify-center mb-8">
+  <div class="relative w-full max-w-md">
+    <select id="fluid"
+      class="block w-full appearance-none text-center  bg-white text-gray-800 font-semibold rounded-full bg-opacity-80 py-3 pl-6 pr-10 shadow-md focus:outline-none focus:ring-2 focus:ring-violet-900 focus:border-violet-900 transition duration-200">
+      <option value="">Select Fluid</option>
+      <option value="Water">Water</option>
+      <option value="Oil">Oil</option>
+      <option value="Glycerin">Glycerin</option>
+      <option value="Ethanol">Ethanol</option>
+      <option value="CCL">Carbon Tetrachloride</option>
+      <option value="COT">Carbon Dioxide</option>
+      <option value="Air">Air</option>
+      <option value="Nitrogen">Nitrogen</option>
+    </select>
+
+    <!-- Custom Dropdown Arrow -->
+    <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-700">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+      <!-- Inputs -->
+      <div class="max-w-xl mx-auto space-y-4">
+        <div><label class="text-sm">FILM THICKNESS (m)</label><input id="film" type="number" class="w-full p-2 rounded-2xl bg-white/10" /></div>
+        <div><label class="text-sm">FLOWRATE (m³/s)</label><input id="flowrate" type="number" class="w-full p-2 rounded-2xl bg-white/10" /></div>
+        <div><label class="text-sm">LENGTH (m)</label><input id="length" type="number" class="w-full p-2 rounded-2xl bg-white/10" /></div>
+        <div><label class="text-sm">TEMPERATURE DIFFERENCE (K)</label><input id="temp" type="number" class="w-full p-2 rounded-2xl bg-white/10" /></div>
+        <div><label class="text-sm">THERMAL CONDUCTIVITY (W/m·K)</label><input id="k" type="number" class="w-full p-2 rounded-2xl bg-white/10" /></div>
+ <br/>
+        <button onclick="calculate()"
+   class="w-full py-3 bg-gradient-to-r from-blue-900 to-purple-600 text-white font-extrabold rounded-full shadow-md hover:from-blue-500 hover:to-purple-300 hover:shadow-lg transition duration-200 ease-in-out">
+  CALCULATE
+</button>
+
+ <br/>
+
+       <!-- Outputs -->
+<div id="results" class="hidden space-y-4 mt-4">
+  <div class="bg-gradient-to-r from-purple-700 to-purple-400 p-4 rounded-xl border border-white/30 shadow-md">
+    <p class="text-xs text-white">HEAT TRANSFER COEFFICIENT (W/m²·K)</p>
+    <p id="hTCoff" class="text-cyan-300 font-bold text-lg">-</p>
+  </div>
+  <div class="bg-gradient-to-r from-purple-700 to-purple-400 p-4 rounded-xl border border-white/30 shadow-md">
+    <p class="text-xs text-white">HEAT TRANSFER RATE (W)</p>
+    <p id="hTRate" class="text-cyan-300 font-bold text-lg">-</p>
+  </div>
+</div>
+
+<!-- New Clear All Button -->
+<button onclick="clearAll()" 
+  class="w-full py-2 mt-2 rounded-full font-bold text-sm text-white bg-gradient-to-r from-pink-900 to-fuchsia-200 shadow-md hover:from-red-400 hover:to-pink-300 transition duration-200 ease-in-out">
+  CLEAR ALL
+</button>
+
+
+  <script>
+    const fluidProps = {
+      Water: { cp: 4200, rho: 997, mu: 0.001, k: 0.6 },
+      Oil: { cp: 2000, rho: 800, mu: 0.05, k: 0.15 },
+      Glycerin: { cp: 2400, rho: 1260, mu: 1.49, k: 0.28 },
+      Ethanol: { cp: 2450, rho: 789, mu: 0.0012, k: 0.171 },
+      CCL: { cp: 855, rho: 1590, mu: 0.0009, k: 0.105 },
+      COT: { cp: 846, rho: 1.977, mu: 0.0000147, k: 0.0146 },
+      Air: { cp: 1005, rho: 1.225, mu: 0.0000181, k: 0.0262 },
+      Nitrogen: { cp: 1040, rho: 1.251, mu: 0.0000179, k: 0.0258 },
+    };
+
+   function calculate() {
+  const fluid = document.getElementById("fluid").value;
+  const props = fluidProps[fluid];
+  const flow = parseFloat(document.getElementById("flowrate").value);
+  const tempDiff = parseFloat(document.getElementById("temp").value);
+  const film = parseFloat(document.getElementById("film").value);
+  const length = parseFloat(document.getElementById("length").value);
+
+  if (!props || isNaN(flow) || isNaN(tempDiff) || isNaN(film) || isNaN(length)) return;
+
+  const vel = flow / (props.rho * film);
+  const Re = (props.rho * vel * length) / props.mu;
+  const Pr = (props.cp * props.mu) / props.k;
+
+  let Nu;
+  if (Re < 1000) Nu = 0.664 * Math.sqrt(Re) * Math.cbrt(Pr);
+  else if (Re <= 5000) Nu = 0.023 * Math.pow(Re, 0.8) * Math.cbrt(Pr);
+  else Nu = 0.027 * Math.pow(Re, 0.8) * Math.cbrt(Pr);
+
+  const hTC = (Nu * props.k) / length;
+  const hTR = flow * props.cp * tempDiff;
+
+  document.getElementById("hTCoff").textContent = hTC.toFixed(6);
+  document.getElementById("hTRate").textContent = hTR.toFixed(6);
+  document.getElementById("results").classList.remove("hidden");
+
+  // Save to localStorage (inside calculate)
+  const entry = {
+    fluid,
+    hTC: hTC.toFixed(6),
+    hTR: hTR.toFixed(6),
+    timestamp: new Date().toLocaleString()
+  };
+
+  let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
+  if (history.length >= 20) history.shift(); // Keep only 20
+  history.push(entry);
+  localStorage.setItem("calcHistory", JSON.stringify(history));
+}
+
+function clearAll() {
+  ["fluid", "flowrate", "temp", "film", "length", "k"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("results").classList.add("hidden");
+}
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body
+  class="h-screen w-screen bg-cover bg-center text-white overflow-auto"
+  style="background-image: url('../assets/images/bg2.png');"
+>
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="h-screen w-16 transition-all duration-300 bg-gradient-to-b from-[#27244b] to-[#05031a] fixed flex flex-col items-start px-2 py-6 space-y-6 z-10">
+      
+      <!-- App Icon -->
+      <div class="w-full flex items-center justify-center mb-8 space-x-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-700 to-indigo-500"></div>
+        <span class="nav-label hidden text-sm font-track">WAVE</span>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex flex-col items-start space-y-4 w-full">
+        <button onclick="window.location.href='index.html'" class="flex items-center space-x-3 group text-white w-full px-2 hover:bg-white/10 rounded py-2">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" />
+          </svg>
+          <span class="nav-label hidden text-sm">Home</span>
+        </button>
+
+        <button onclick="window.open('calc.html', '_blank')" class="flex items-center space-x-3 group text-white w-full px-2 hover:bg-white/10 rounded py-2">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M12 4v16m8-8H4" />
+          </svg>
+          <span class="nav-label hidden text-sm">New Calc</span>
+        </button>
+
+        <button onclick="window.location.href='history.html'" class="flex items-center space-x-3 group text-white w-full px-2 hover:bg-white/10 rounded py-2">
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="nav-label hidden text-sm">History</span>
+        </button>
+
+        <button onclick="window.location.href='settings.html'" class="flex items-center space-x-3 group text-white w-full px-2 bg-white/10 rounded py-2">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M11.25 2.25v1.5m0 16.5v1.5M4.219 4.219l1.061 1.061M18.72 18.72l1.06 1.061M2.25 11.25h1.5m16.5 0h1.5M4.219 18.72l1.061-1.06M18.72 5.28l1.06-1.061M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="nav-label hidden text-sm">Settings</span>
+        </button>
+      </nav>
+
+      <!-- Collapse Button -->
+      <div class="mt-auto w-full flex justify-center pt-4">
+        <button onclick="toggleSidebar()" class="text-white opacity-60 hover:opacity-100">
+          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M19 12H5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-16 sm:ml-48 bg-black/40 px-6 py-8">
+      <h1 class="text-3xl font-bold text-pink-400 mb-6 text-center">Settings</h1>
+
+      <div class="max-w-2xl mx-auto space-y-6">
+
+
+        <!-- Reset Data -->
+        <div class="flex justify-between items-center bg-white/10 p-4 rounded-xl border border-white/20">
+          <span class="text-white">Clear All History</span>
+          <button onclick="clearAllHistory()" class="text-sm bg-red-500 hover:bg-red-400 text-white px-3 py-1 rounded">Clear</button>
+        </div>
+
+        <!-- About App -->
+        <div class="bg-white/10 p-4 rounded-xl border border-white/20 text-white text-sm">
+          <h2 class="text-lg font-semibold mb-2">About This App</h2>
+          <p>This tool helps calculate and track heat transfer data for falling film systems. Built with React Native, Tailwind, and local storage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("w-48");
+      sidebar.classList.toggle("w-16");
+
+      const labels = sidebar.querySelectorAll(".nav-label");
+      labels.forEach(label => label.classList.toggle("hidden"));
+    }
+
+    function clearAllHistory() {
+      if (confirm("This will delete all saved calculation history. Continue?")) {
+        localStorage.removeItem("calcHistory");
+        alert("All history cleared.");
+      }
+    }
+
+    // (Optional) Theme toggle logic placeholder
+    document.getElementById("themeToggle").addEventListener("change", function () {
+      alert("Theme toggle coming soon!");
+    });
+  </script>
+</body>
+</html>
